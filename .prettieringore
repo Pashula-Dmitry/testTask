@@ -1,0 +1,11 @@
+node_modules
+build
+docker
+Dockerfile
+public
+*.json
+.gitlab
+.next
+k8s
+assets
+src/assets
