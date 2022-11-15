@@ -30,9 +30,11 @@
     "jsx-a11y"
   ],
   "rules": {
+    "no-useless-catch": "warn",
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/consistent-type-assertions": "error",
+    "react/react-in-jsx-scope": "off",
     "@typescript-eslint/dot-notation": "error",
     "@typescript-eslint/member-delimiter-style": [
       "error",
@@ -175,6 +177,14 @@
     "no-restricted-imports": [
       "error",
       "rxjs/Rx"
+    ],
+    "@typescript-eslint/no-restricted-imports": [
+      "warn",
+      {
+        "name": "react-redux",
+        "importNames": ["useSelector", "useDispatch"],
+        "message": "Use typed hooks `useTypedSelector` and `useAppDispatch` instead."
+      }
     ],
     "eqeqeq": "error",
     "use-isnan": "error",

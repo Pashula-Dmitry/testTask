@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
     "allowJs": true,
     "alwaysStrict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "lib": ["dom", "es2017", "esnext"],
     "module": "esnext",
     "moduleResolution": "node",
@@ -16,18 +15,10 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "composite": true,
     "strict": true,
-    "target": "esnext",
+    "target": "es5",
     "strictNullChecks": false,
-    "paths": {
-      "@shared/*": ["shared/*"],
-      "@pages/*": ["pages/*"],
-      "@styles/*": ["../styles/*"],
-      "@store/*": ["shared/store/*"],
-      "@assets/*": ["assets/*"],
-      "@test-utils/*": ["test-utils/*"],
-      "@mocks/*": ["mocks/*"]
-    },
     "incremental": true
   },
   "exclude": [
@@ -36,5 +27,6 @@
   "include": [
     "**/*.ts",
     "**/*.tsx"
-  ]
+  ],
+  "extends": "./tsconfig.paths.json"
 }

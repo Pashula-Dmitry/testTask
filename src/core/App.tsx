@@ -1,10 +1,9 @@
-import React from 'react';
+import Routes from '@core/Routes';
 
 const App = (): JSX.Element => {
-
   return (
     <div>
-      {process.env.REACT_KEY}
+      <Routes />
     </div>
   );
 };
