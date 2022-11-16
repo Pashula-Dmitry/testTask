@@ -12,8 +12,16 @@ export const orbitTypes = [
   'SO',
   'GEO',
 ];
+
 export const enum TARGET_CHANGE {
   SELECT = 'select',
   CHECKBOX = 'checkbox',
   SEARCH = 'search',
 }
+
+export const enum RADIO {
+  WITH = 'WITH',
+  WITHOUT = 'WITHOUT',
+}
+
+export const LIMIT = 10;

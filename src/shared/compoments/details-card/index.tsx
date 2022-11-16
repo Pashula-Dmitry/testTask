@@ -8,8 +8,9 @@ import {
   ImageContainer,
   VideoContaoner,
   TextBold,
+  DetailsRocket,
 } from './styles';
-
+import defaultImg from '@assets/images/imageDefault.png';
 import {Launcher} from '@shared/types';
 
 type Props = {
@@ -22,7 +23,7 @@ const DetailsCard: FC<Props> = (props) => {
   return (
     <CardContainer>
       <ImageContainer>
-        <Image src={item.links.mission_patch} alt={'launch'} />
+        <Image src={item.links.mission_patch ?? defaultImg} alt={'launch'} />
         <ImageDescription>
           <p>
             <TextBold>Name:</TextBold> {item.rocket.rocket_name}
@@ -45,9 +46,9 @@ const DetailsCard: FC<Props> = (props) => {
           >
           </iframe>
         </VideoContaoner>
-        <p style={{maxWidth: '400px'}}>
+        <DetailsRocket>
           <TextBold>Details:</TextBold> {item.details}
-        </p>
+        </DetailsRocket>
         <p>
           <TextBold>Rocket name:</TextBold> {item.rocket.rocket_name}
         </p>
@@ -56,7 +57,7 @@ const DetailsCard: FC<Props> = (props) => {
         </p>
         <p>
           <TextBold>Orbit:</TextBold>{' '}
-          {item.rocket.second_stage.payloads[0].orbit}
+          {item.rocket.second_stage.payloads.map((payload) => payload.orbit).join(', ')}
         </p>
         <p>
           <TextBold>Launch success:</TextBold>{' '}

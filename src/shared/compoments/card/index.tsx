@@ -9,6 +9,7 @@ import {
 } from './styles';
 
 import {Launcher} from '@shared/types';
+import defaultImg from '@assets/images/imageDefault.png';
 
 type Props = {
   item: Launcher;
@@ -20,21 +21,21 @@ const Card: FC<Props> = (props) => {
   return (
     <CardContainer>
       <Linker to={`${item.flight_number}/popup`}>
-        <Image src={item.links.mission_patch} alt={'launch'} />
+        <Image src={item.links.mission_patch ?? defaultImg} alt={'launch'} />
       </Linker>
       <ImageDescription>
         <p>
-          <TextBold>Name:</TextBold> {item.rocket.rocket_name}
+          <TextBold>Name: </TextBold> {item.rocket.rocket_name}
         </p>
         <p>
-          <TextBold>Year:</TextBold> {item.launch_year}
+          <TextBold>Year: </TextBold> {item.launch_year}
         </p>
         <p>
-          <TextBold>Orbit:</TextBold>
-          {item.rocket.second_stage.payloads[0].orbit}
+          <TextBold>Orbit: </TextBold>
+          {item.rocket.second_stage.payloads.map((payload) => payload.orbit).join(', ')}
         </p>
         <p>
-          <TextBold>Launch success:</TextBold>
+          <TextBold>Launch success: </TextBold>
           {item.launch_success ? 'Yes' : 'No'}
         </p>
       </ImageDescription>

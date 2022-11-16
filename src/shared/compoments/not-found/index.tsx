@@ -1,4 +1,5 @@
 import {FC} from 'react';
+import {Link} from 'react-router-dom';
 
 type Props = {
   text: string;
@@ -7,7 +8,12 @@ type Props = {
 const NotFound: FC<Props> = (props) => {
   const {text} = props;
 
-  return <div>{text}</div>;
+  return (
+    <div>
+      <p>{text}</p>
+      <Link to={'/'}>Go main</Link>
+    </div>
+  );
 };
 
 export default NotFound;

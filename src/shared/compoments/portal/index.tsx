@@ -7,6 +7,7 @@ type Props = {
 };
 
 const Portal: FC<Props> = ({isOpen, children}: Props) => {
+
   if (!isOpen) {
     return null;
   }

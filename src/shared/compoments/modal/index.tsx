@@ -1,6 +1,9 @@
 import React, {FC} from 'react';
+
 import {ReactComponent as Close} from '@assets/icons/close.svg';
+
 import Portal from '@shared/compoments/portal';
+
 import {ModalStyles, Overlay, Surface, Header, Content} from './styles';
 
 type Props = {

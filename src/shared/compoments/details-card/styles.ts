@@ -18,6 +18,10 @@ const VideoContaoner = styled.p`
   margin-bottom: 45px;
 `;
 
+const DetailsRocket = styled.p`
+  max-width: 400px;
+`;
+
 const ImageContainer = styled.div`
   width: 300px;
   height: 300px;
@@ -48,4 +52,5 @@ export {
   ImageContainer,
   VideoContaoner,
   TextBold,
+  DetailsRocket,
 };

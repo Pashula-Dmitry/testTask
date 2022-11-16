@@ -1,41 +1,25 @@
 import {FC, useEffect} from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import {GridContainer} from '@shared/compoments/Launches/styles';
+import {GridContainer, LoaderWrapper} from '@shared/compoments/Launches/styles';
 import {useTypedSelector} from '@shared/hooks/useTypedSelector';
 import Card from '@shared/compoments/card';
 import Loader from '@shared/compoments/loader';
 import {useAppDispatch} from '@shared/hooks/useAppDispatch';
 import {fetchLaunches} from '@store/launchers/actions';
-import {Filters} from '@shared/types';
 import EmptyList from '../EmtyList';
-import {FiltersCut} from '@store/launchers/reducer';
+import {parseFilters} from '@shared/helpers/parseFilters';
+import {LIMIT} from '@shared/constants';
+import {getFilters, getLaunches, getLoading, getOffset, getTotal} from '@store/launchers/selectors';
 
 type Props = {};
 
-const buildFilters = (filters: FiltersCut, condition: boolean) => {
-  const params: Filters = {};
-
-  if (condition) {
-    params.rocket_name = filters.rocket_name;
-    params.orbit = filters.orbit;
-    if (filters.launch_success) {
-      params.launch_success = filters.launch_success;
-    }
-  }
-  return params;
-};
-
 const Launches: FC<Props> = (_props) => {
   const dispatch = useAppDispatch();
-
-  const listLaunchers = useTypedSelector(
-    (state) => state.launches.listLaunchers,
-  );
-  const isLoading = useTypedSelector((state) => state.launches.loading);
-  const total = useTypedSelector((state) => state.launches.total);
-  const limit = useTypedSelector((state) => state.launches.limit);
-  const offset = useTypedSelector((state) => state.launches.offset);
-  const filters = useTypedSelector((state) => state.launches.filters);
+  const listLaunchers = useTypedSelector(getLaunches);
+  const isLoading = useTypedSelector(getLoading);
+  const total = useTypedSelector(getTotal);
+  const offset = useTypedSelector(getOffset);
+  const filters = useTypedSelector(getFilters);
   const hasAnyFilter = !!(
     filters.rocket_name.length ||
     filters.orbit.length ||
@@ -45,9 +29,9 @@ const Launches: FC<Props> = (_props) => {
   useEffect(() => {
     dispatch(
       fetchLaunches({
-        limit,
         offset,
-        ...buildFilters(filters, hasAnyFilter),
+        limit: LIMIT,
+        ...parseFilters(filters, hasAnyFilter),
       }),
     );
   }, [dispatch]);
@@ -56,8 +40,8 @@ const Launches: FC<Props> = (_props) => {
     dispatch(
       fetchLaunches({
         offset: listLaunchers.length,
-        limit,
-        ...buildFilters(filters, hasAnyFilter),
+        limit: LIMIT,
+        ...parseFilters(filters, hasAnyFilter),
       }),
     );
   };
@@ -68,11 +52,16 @@ const Launches: FC<Props> = (_props) => {
 
   return (
     <>
+      {isLoading && (
+        <LoaderWrapper>
+          <Loader message={'Wait loading...'} mode={'block'} />
+        </LoaderWrapper>
+      )}
       {listLaunchers.length ? (
         <InfiniteScroll
           dataLength={listLaunchers.length}
           next={fetchMoreData}
-          hasMore={listLaunchers.length < total && !hasAnyFilter}
+          hasMore={listLaunchers.length < total}
           loader={<h4>Loading...</h4>}
           scrollThreshold={0.9}
           style={{overflow: 'visible'}}

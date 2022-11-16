@@ -193,10 +193,11 @@ export type SelectData = {
 };
 
 export type Filters = {
-  withFilters?: boolean;
   launch_success?: boolean;
-  orbit?: string[];
+  orbit?: string;
   rocket_name?: string;
   offset?: number;
   limit?: number;
+  sort?: string;
+  order?: string;
 };

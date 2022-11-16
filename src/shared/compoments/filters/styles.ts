@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 export const PanelFilters = styled.div`
   width: 100%;
@@ -11,7 +11,19 @@ export const Deliver = styled.hr`
   background: var(--secondary-color);
 `;
 
-export const ContainerCheckbox = styled.p`
+export const ContainerCheckRadio = styled.p`
   display: flex;
-  column-gap: 40px;
+  column-gap: 25px;
+`;
+
+interface ILabel {
+  isActive: boolean;
+}
+
+export const LabelRadio = styled.label<ILabel>`
+  cursor: pointer;
+  ${({isActive}) => isActive && css`
+    text-decoration: underline;
+    font-weight: 700;
+  `}
 `;
